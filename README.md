@@ -1,90 +1,90 @@
-# React + TypeScript + Vite
+# Project Creator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Creator is a Vite + React + TypeScript application that helps you turn raw product ideas into actionable technical documentation. It guides you through a step-by-step UI to clarify your idea, then generates five Markdown documents: a Product Requirements Document (PRD), Tech Stack rationale, Frontend spec, Backend spec, and an Implementation Plan. All documents are generated using the OpenAI API and can be previewed and downloaded from the app.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Multi-step Wizard:**
+  - **Idea Input:** Enter your raw idea.
+  - **Clarification Dialogue:** Answer 4–6 dynamic questions to refine your idea (users, features, metrics, constraints, timeline, etc).
+  - **Document Generation:** Calls OpenAI to generate five detailed Markdown documents.
+  - **Output Viewer:** Preview each document in a tabbed interface and download as `.md` files.
+- **Modern React UI:** Clean, responsive, and accessible interface.
+- **State Management:** Uses React Context for global state.
+- **OpenAI Integration:** Uses your API key to generate content.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Generated Documents
+
+1. **Product Requirements Document (`prd.md`):**
+   - Overview, user personas, problem statement, value proposition
+   - Features (MVP vs. future)
+   - User flows & wireframes (ASCII/Mermaid diagrams)
+   - Success metrics & KPIs
+2. **Tech Stack Rationale (`tech-stack.md`):**
+   - Frontend, backend, database, DevOps, and rationale for each
+3. **Frontend Specification (`frontend.md`):**
+   - Component tree, pages/routes, state management, UI/UX notes
+4. **Backend Specification (`backend.md`):**
+   - Architecture diagram, API endpoints, database schema, security, integrations
+5. **Implementation Plan (`implementation-plan.md`):**
+   - Phase-by-phase build plan with granular tasks and timelines
+
+---
+
+## Getting Started
+
+### 1. Clone & Install
+
+```sh
+git clone <your-repo-url>
+cd ProjectCreator
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Set Up Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Copy `.env.example` to `.env` and add your OpenAI API key:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+cp .env.example .env
+# Edit .env to set VITE_OPENAI_API_KEY
 ```
 
-## Environment Setup
+### 3. Run the App
 
-1. Copy `.env.example` to `.env` and add your OpenAI API key:
-   ```sh
-   cp .env.example .env
-   # Then edit .env to set VITE_OPENAI_API_KEY
-   ```
+```sh
+npm run dev
+```
+The app will be available at [http://localhost:5173](http://localhost:5173).
 
-2. Install dependencies:
-   ```sh
-   npm install
-   # or
-   yarn install
-   ```
+---
 
-3. Start the development server:
-   ```sh
-   npm run dev
-   # or
-   yarn dev
-   ```
+## Project Structure
 
-## Usage
+- `src/App.tsx` — Main app logic and stepper
+- `src/components/IdeaForm.tsx` — Idea input form
+- `src/components/ClarificationStep.tsx` — Clarification dialogue
+- `src/components/DocsViewer.tsx` — Markdown document viewer
+- `src/components/DownloadButton.tsx` — Download `.md` files
+- `src/contexts/IdeationContext.tsx` — App state context
+- `src/utils/openai.ts` — OpenAI API integration
 
-- Enter your raw idea in the first step.
-- Answer the clarification questions.
-- Wait for the app to generate five Markdown documents using OpenAI.
-- View and download each document from the UI.
+---
 
-## Required Environment Variables
-- `VITE_OPENAI_API_KEY` – Your OpenAI API key (sk-...)
+## Requirements
+- Node.js v18+
+- OpenAI API key
 
-## Notes
-- Your API key is kept client-side. Do not expose it in public deployments.
-- This app uses Vite, React, and TypeScript.
+---
+
+## License
+MIT
+
+---
+
+## Credits
+Created by Daniele L. Efford. Powered by Vite, React, and OpenAI.
